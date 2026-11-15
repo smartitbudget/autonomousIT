@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>autonomousIT — From Helpdesk to Self-Running IT</title>
+<meta name="description" content="Interactive animated story of autonomous IT, starting at the Helpdesk: AI triage, auto-resolution and a closed-loop operations model. By Mahendran Varadharajan.">
+<link rel="canonical" href="https://smartitbudget.github.io/autonomousIT">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="autonomousIT">
+<meta property="og:title" content="autonomousIT — From Helpdesk to Self-Running IT">
+<meta property="og:description" content="Interactive animated story of autonomous IT, starting at the Helpdesk. By Mahendran Varadharajan.">
+<meta property="og:url" content="https://smartitbudget.github.io/autonomousIT">
+<meta property="og:image" content="https://smartitbudget.github.io/autonomousIT/cover.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="autonomousIT — From Helpdesk to Self-Running IT">
+<meta name="twitter:description" content="Interactive animated story of autonomous IT, starting at the Helpdesk.">
+<meta name="twitter:image" content="https://smartitbudget.github.io/autonomousIT/cover.png">
+<style>
+:root{--bg:#070b18;--ink:#e8eefc;--mut:#8b9ac2;--c1:#22d3ee;--c2:#8b5cf6;--ok:#34d399;--card:#101834;--ln:#22305e}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:12px;overflow-x:hidden}
+#wrap{width:min(100%,1280px);aspect-ratio:16/9;position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--ln)}
+#stage{width:1280px;height:720px;position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden;background:var(--bg)}
+.blob{position:absolute;width:620px;height:620px;border-radius:50%;filter:blur(90px);opacity:.35}
+.grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:48px 48px}
+.el{position:absolute;opacity:0;visibility:hidden;will-change:transform,opacity}
+.brand{left:56px;top:34px;font-weight:800;font-size:22px;letter-spacing:.3px;display:flex;align-items:center;gap:10px}
+.brand i{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:block;box-shadow:0 0 16px var(--c1)}
+.kick{font-size:15px;letter-spacing:3px;color:var(--c1);font-weight:700;margin-bottom:14px}
+h1{font-size:54px;line-height:1.08;font-weight:800;letter-spacing:-1px}
+h1 b{background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:20px;color:var(--mut);line-height:1.45;margin-top:18px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:16px 18px;box-shadow:0 20px 50px #0008}
+.chip{display:inline-block;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.5px}
+.new{background:#f59e0b22;color:#fbbf24}.tri{background:#8b5cf622;color:#c4b5fd}.res{background:#34d39922;color:var(--ok)}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+.node{padding:14px 20px;border-radius:14px;background:var(--card);border:1px solid var(--ln);font-weight:700;font-size:18px;text-align:center}
+.tile{width:250px;height:150px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.tile b{font-size:22px}.tile span{color:var(--mut);font-size:15px}
+a.pc{display:flex;gap:18px;align-items:center;text-decoration:none;color:var(--ink);width:520px;padding:22px 26px;border-radius:20px;background:var(--card);border:2px solid var(--c1)}
+.logo{width:68px;height:68px;border-radius:16px;display:grid;place-items:center;font-weight:900;font-size:34px;color:#fff;flex:none}
+a.pc h3{font-size:26px}a.pc p{color:var(--mut);font-size:16px;margin-top:4px}
+.go{margin-left:auto;font-weight:800;color:var(--c1);font-size:18px;white-space:nowrap}
+.url{font-size:17px;padding:10px 18px;border-radius:999px;border:1px solid var(--ln);background:#0c1430;color:var(--c1)}
+#ctl{width:min(100%,1280px);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+button,.sb{font:600 14px Inter,system-ui,sans-serif;color:var(--ink);background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:9px 14px;cursor:pointer;text-decoration:none}
+button:hover,.sb:hover{border-color:var(--c1)}
+#seek{flex:1;min-width:160px;accent-color:var(--c1)}
+#share{width:min(100%,1280px);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#share small{color:var(--mut);margin-right:6px}
+#cover{display:none;width:1200px;height:630px;position:relative;overflow:hidden;background:#070b18}
+body.cap{padding:0;display:block}body.cap #ctl,body.cap #share{display:none}
+body.cap #wrap{width:1280px;height:720px;border:0;border-radius:0}
+body.cov{padding:0;display:block}body.cov #ctl,body.cov #share,body.cov #stage{display:none}body.cov #wrap{width:1200px;height:630px;border:0;border-radius:0;aspect-ratio:auto}body.cov #cover{display:block}
+@media(max-width:700px){#share small{display:none}}
+</style></head><body>
+<div id="wrap"><div id="stage">
+<div class="blob" id="b1" style="background:#22d3ee;left:-120px;top:-200px"></div>
+<div class="blob" id="b2" style="background:#8b5cf6;right:-160px;bottom:-260px"></div>
+<div class="grid"></div>
+<div class="el brand" data-s="0" data-e="38" data-y="-10"><i></i>autonomousIT</div>
+
+<!-- S1 HELPDESK -->
+<div class="el" data-s="0.2" data-e="6" style="left:56px;top:190px;width:540px"><div class="kick">01 · HELPDESK</div><h1>Autonomous IT <b>begins at the Helpdesk.</b></h1><p class="sub">Where every request, outage and “can you help?” lands first.</p></div>
+<div class="el card" data-s="1" data-e="6" data-x="60" data-y="0" style="left:680px;top:150px;width:520px"><div style="color:var(--mut);font-size:14px;margin-bottom:8px">Employee · chat</div><div class="type" data-text="My VPN keeps dropping — I can’t join the call!" data-d="0.5" style="font-size:22px;min-height:62px"></div></div>
+<div class="el card" data-s="1" data-d="2.2" data-e="6" data-x="60" data-y="0" style="left:680px;top:300px;width:520px"><div style="display:flex;justify-content:space-between;align-items:center"><b class="mono">INC-1042</b><span class="chip new">NEW</span></div><div style="margin-top:8px;font-size:19px">VPN disconnects repeatedly</div><div style="color:var(--mut);margin-top:4px;font-size:14px">Priority: unassigned · waiting</div></div>
+<div class="el card" data-s="1" data-d="3.0" data-e="6" data-x="60" data-y="0" style="left:700px;top:440px;width:480px;opacity:.8"><b class="mono">INC-1043</b> &nbsp;Password reset <span class="chip new" style="float:right">NEW</span></div>
+<div class="el card" data-s="1" data-d="3.5" data-e="6" data-x="60" data-y="0" style="left:720px;top:512px;width:440px"><b class="mono">INC-1044</b> &nbsp;Laptop running slow <span class="chip new" style="float:right">NEW</span></div>
+<div class="el" data-s="1" data-d="4" data-e="6" style="left:680px;top:600px;color:var(--mut);font-size:16px">Tickets pile up. Humans queue. Time is lost.</div>
+
+<!-- S2 TRIAGE -->
+<div class="el" data-s="6.2" data-e="12" style="left:56px;top:190px;width:540px"><div class="kick">02 · AI TRIAGE</div><h1>An agent <b>reads, classifies, routes.</b></h1><p class="sub">Context from monitoring and CMDB, in milliseconds.</p></div>
+<div class="el node" data-s="6.6" data-e="12" data-y="0" data-x="40" style="left:640px;top:170px;width:150px">Intake</div>
+<div class="el node" data-s="6.9" data-e="12" data-y="0" data-x="40" style="left:810px;top:170px;width:150px">Classify</div>
+<div class="el node" data-s="7.2" data-e="12" data-y="0" data-x="40" style="left:980px;top:170px;width:150px">Context</div>
+<div class="el node" data-s="7.5" data-e="12" data-y="0" data-x="40" style="left:1060px;top:260px;width:150px;display:none">Route</div>
+<div class="el" data-s="6.6" data-e="12" style="left:715px;top:216px;width:340px;height:3px;background:var(--ln)"></div>
+<div class="el" id="pkt" data-s="7" data-e="12" style="left:715px;top:208px;width:18px;height:18px;border-radius:50%;background:var(--c1);box-shadow:0 0 24px var(--c1)"></div>
+<div class="el card" data-s="6.6" data-d="2.2" data-e="12" style="left:660px;top:300px;width:520px"><div style="display:flex;justify-content:space-between"><b class="mono">INC-1042</b><span class="chip tri">TRIAGED</span></div>
+<div class="mono" style="margin-top:14px;font-size:16px;line-height:2"><span style="color:var(--mut)">category </span> Network / VPN<br><span style="color:var(--mut)">priority &nbsp;</span> P2 · affects meeting<br><span style="color:var(--mut)">cause &nbsp;&nbsp;&nbsp;&nbsp;</span> gateway session timeout<br><span style="color:var(--mut)">route &nbsp;&nbsp;&nbsp;&nbsp;</span> → auto-resolve runbook</div></div>
+<div class="el" data-s="6.6" data-d="3.6" data-e="12" style="left:660px;top:540px;color:var(--mut);font-size:15px">Illustrative scenario for demonstration.</div>
+
+<!-- S3 RESOLVE -->
+<div class="el" data-s="12.2" data-e="18" style="left:56px;top:190px;width:540px"><div class="kick">03 · AUTO-RESOLVE</div><h1>Then it <b>fixes it.</b> No queue.</h1><p class="sub">Runbooks execute, results are verified, the user is told.</p></div>
+<div class="el card mono" data-s="12.5" data-e="18" data-x="50" data-y="0" style="left:650px;top:150px;width:560px;font-size:17px;line-height:2.1">
+<div style="color:var(--mut)">$ runbook vpn-session-recovery</div>
+<div class="el2" data-t="13.2">› check gateway health <span style="color:var(--ok)">✓</span></div>
+<div class="el2" data-t="14.0">› reset stale user session <span style="color:var(--ok)">✓</span></div>
+<div class="el2" data-t="14.8">› push updated VPN profile <span style="color:var(--ok)">✓</span></div>
+<div class="el2" data-t="15.6">› verify tunnel &amp; latency <span style="color:var(--ok)">✓</span></div></div>
+<div class="el card" data-s="12.5" data-d="3.4" data-e="18" style="left:650px;top:430px;width:560px;border-color:var(--ok);display:flex;align-items:center;gap:20px"><span class="chip res" style="font-size:16px">RESOLVED</span><div><div id="tm" class="mono" style="font-size:40px;font-weight:800">00:00</div><div style="color:var(--mut);font-size:14px">time to resolve (illustrative)</div></div><div style="margin-left:auto;font-size:18px;max-width:170px">“You’re back online.”</div></div>
+
+<!-- S4 LOOP -->
+<div class="el" data-s="18.2" data-e="25" style="left:56px;top:190px;width:540px"><div class="kick">04 · THE LOOP</div><h1>A closed loop that <b>never clocks out.</b></h1><p class="sub">Observe, decide, act, verify, learn — then do it again, better.</p></div>
+<div class="el" data-s="18.6" data-e="25" style="left:790px;top:270px;width:220px;height:220px;border-radius:50%;border:1px dashed var(--ln)"></div>
+<div class="el" data-s="18.6" data-e="25" style="left:830px;top:340px;width:140px;text-align:center;font-weight:800;font-size:22px;line-height:1.2"><b>Autonomous</b><br><span style="color:var(--c1)">IT</span></div>
+<div class="el node orb" data-s="18.8" data-d="0.0" data-e="25" data-y="0" style="width:130px">Observe</div>
+<div class="el node orb" data-s="18.8" data-d="0.3" data-e="25" data-y="0" style="width:130px">Decide</div>
+<div class="el node orb" data-s="18.8" data-d="0.6" data-e="25" data-y="0" style="width:130px">Act</div>
+<div class="el node orb" data-s="18.8" data-d="0.9" data-e="25" data-y="0" style="width:130px">Verify</div>
+<div class="el node orb" data-s="18.8" data-d="1.2" data-e="25" data-y="0" style="width:130px">Learn</div>
+
+<!-- S5 BEYOND -->
+<div class="el" data-s="25.2" data-e="31" style="left:56px;top:190px;width:500px"><div class="kick">05 · BEYOND THE HELPDESK</div><h1>One pattern, <b>every IT domain.</b></h1><p class="sub">The same loop scales across the stack.</p></div>
+<div class="el card tile" data-s="25.5" data-d="0" data-e="31" style="left:620px;top:170px"><b>Helpdesk</b><span>Triage · resolve · communicate</span></div>
+<div class="el card tile" data-s="25.5" data-d="0.4" data-e="31" style="left:900px;top:170px"><b>Infrastructure</b><span>Detect · heal · scale</span></div>
+<div class="el card tile" data-s="25.5" data-d="0.8" data-e="31" style="left:620px;top:350px"><b>Security</b><span>Spot · contain · report</span></div>
+<div class="el card tile" data-s="25.5" data-d="1.2" data-e="31" style="left:900px;top:350px"><b>IT Budget</b><span>Forecast · optimise · govern</span></div>
+<div class="el url" data-s="25.5" data-d="2.2" data-e="31" style="left:620px;top:550px">smartitbudget.github.io/autonomousIT</div>
+
+<!-- S6 CONNECT -->
+<div class="el" data-s="31.2" data-e="38.5" data-y="-20" style="left:56px;top:120px;width:1168px;text-align:center"><div class="kick">06 · LET’S CONNECT</div><h1 style="font-size:64px">Need to reach me? <b>I’m right here.</b></h1><p class="sub" style="margin-top:10px">Mahendran Varadharajan</p></div>
+<a class="el pc hl" id="h1" data-s="31.6" data-d="0.3" data-e="38.5" data-y="40" href="https://www.linkedin.com/in/mahendranvaradharajan/" target="_blank" rel="noopener" style="left:90px;top:330px"><div class="logo" style="background:#0a66c2">in</div><div><h3>LinkedIn</h3><p>Connect &amp; message me</p></div><div class="go">Connect →</div></a>
+<a class="el pc hl" id="h2" data-s="31.6" data-d="0.8" data-e="38.5" data-y="40" href="https://www.scribd.com/document/1094326085/Mahendran-Varadharajan-Resume-pdf" target="_blank" rel="noopener" style="left:670px;top:330px;border-color:var(--c2)"><div class="logo" style="background:#1e7b85;font-family:Georgia,serif">S</div><div><h3>Scribd · Résumé</h3><p>Read my full profile</p></div><div class="go" style="color:#c4b5fd">Read →</div></a>
+<div class="el" data-s="31.6" data-d="1.8" data-e="38.5" style="left:0;top:500px;width:1280px;text-align:center;font-size:19px;color:var(--mut)">Share this story everywhere ↓ &nbsp; <span class="url">smartitbudget.github.io/autonomousIT</span></div>
+</div>
+<div id="cover"></div></div>
+
+<div id="ctl"><button id="pp">⏸ Pause</button><button id="rs">↺ Restart</button><input id="seek" type="range" min="0" max="38.5" step="0.01" value="0"><span id="tt" class="mono" style="font-size:13px;color:var(--mut)">0:00</span>
+<button data-j="0">Helpdesk</button><button data-j="6.2">Triage</button><button data-j="12.2">Resolve</button><button data-j="18.2">Loop</button><button data-j="25.2">Beyond</button><button data-j="31.2">Connect</button></div>
+<div id="share"><small>Share:</small>
+<button data-n="native">Share…</button><button data-n="linkedin">LinkedIn</button><button data-n="x">X</button><button data-n="facebook">Facebook</button><button data-n="whatsapp">WhatsApp</button><button data-n="telegram">Telegram</button><button data-n="reddit">Reddit</button><button data-n="email">Email</button><button data-n="copy">Copy link</button></div>
+
+<script>
+/* ---- Share API: always shares the GitHub Pages URL; previews come from its Open Graph tags ---- */
+window.AutonomousITShare=(function(){
+  const url="https://smartitbudget.github.io/autonomousIT",title="autonomousIT — From Helpdesk to Self-Running IT",
+  text="Interactive animated story of autonomous IT, starting at the Helpdesk. By Mahendran Varadharajan.";
+  const e=encodeURIComponent,links={
+    linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${e(url)}`,
+    x:`https://twitter.com/intent/tweet?url=${e(url)}&text=${e(title)}`,
+    facebook:`https://www.facebook.com/sharer/sharer.php?u=${e(url)}`,
+    whatsapp:`https://wa.me/?text=${e(title+" "+url)}`,
+    telegram:`https://t.me/share/url?url=${e(url)}&text=${e(title)}`,
+    reddit:`https://www.reddit.com/submit?url=${e(url)}&title=${e(title)}`,
+    email:`mailto:?subject=${e(title)}&body=${e(text+"\n\n"+url)}`};
+  async function share(n){
+    if(n==="native"){ if(navigator.share){try{await navigator.share({title,text,url});return}catch(_){return}} n="copy"}
+    if(n==="copy"){try{await navigator.clipboard.writeText(url);alert("Link copied: "+url)}catch(_){prompt("Copy link:",url)};return}
+    if(links[n])window.open(links[n],"_blank","noopener,width=720,height=640")
+  }
+  return {url,title,text,links,share};
+})();
+document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>AutonomousITShare.share(b.dataset.n));
+
+/* ---- Animation engine: everything is a pure function of time t ---- */
+const DUR=38.5,$=s=>document.querySelector(s),stage=$("#stage"),wrap=$("#wrap");
+const E=x=>x<0?0:x>1?1:1-Math.pow(1-x,3),C=x=>Math.max(0,Math.min(1,x));
+const els=[...document.querySelectorAll(".el")],typ=[...document.querySelectorAll(".type")],ck=[...document.querySelectorAll(".el2")],orb=[...document.querySelectorAll(".orb")];
+ck.forEach(c=>{c.style.opacity=0});
+function render(t){
+  els.forEach(el=>{const d=el.dataset,s=+d.s,e=+d.e,dl=+(d.d||0);
+    const i=E((t-s-dl)/.6),o=E((e-t)/.5),a=Math.min(i,o);
+    el.style.opacity=a;el.style.visibility=a>.01?"visible":"hidden";
+    const x=(d.x?+d.x:0)*(1-i),y=(d.y!==undefined?+d.y:24)*(1-i);
+    el.style.transform=`translate(${x}px,${y}px) scale(${.96+.04*i})`});
+  typ.forEach(el=>{const s=+el.parentElement.dataset.s+ +(el.parentElement.dataset.d||0)+ +el.dataset.d;
+    el.textContent=el.dataset.text.slice(0,Math.max(0,Math.floor((t-s)*26)))+(t>s&&t<s+2?"▍":"")});
+  ck.forEach(c=>{c.style.opacity=E((t-+c.dataset.t)/.4)});
+  const pk=$("#pkt");if(pk){const p=C((t-7.3)/2.2);pk.style.left=(715+p*320)+"px"}
+  const tm=C((t-15.9)/1.6)*42;$("#tm").textContent="00:"+String(Math.floor(tm)).padStart(2,"0");
+  orb.forEach((n,k)=>{const a=(k*72+t*28-90)*Math.PI/180;n.style.left=(900+Math.cos(a)*215-65)+"px";n.style.top=(380+Math.sin(a)*170-24)+"px"});
+  const pu=(Math.sin(t*4)+1)/2;
+  ["#h1","#h2"].forEach((q,k)=>{const el=$(q),c=k?"139,92,246":"34,211,238";
+    el.style.boxShadow=t>31.5?`0 0 0 ${4+10*pu}px rgba(${c},.2),0 0 ${40+30*pu}px rgba(${c},.55)`:"0 20px 50px #0008"});
+  $("#b1").style.transform=`translate(${Math.sin(t*.3)*80}px,${Math.cos(t*.25)*60}px)`;
+  $("#b2").style.transform=`translate(${Math.cos(t*.27)*80}px,${Math.sin(t*.31)*60}px)`;
+  $("#seek").value=t;$("#tt").textContent=Math.floor(t/60)+":"+String(Math.floor(t%60)).padStart(2,"0");
+}
+window.setT=t=>{render(t)};
+let t=0,playing=true,last=performance.now();
+function fit(){if(document.body.classList.contains("cap"))return;stage.style.transform=`scale(${wrap.clientWidth/1280})`}
+addEventListener("resize",fit);fit();
+const q=location.search;
+if(q.includes("capture")){document.body.classList.add("cap");stage.style.transform="none";playing=false}
+if(q.includes("cover")){document.body.classList.add("cov");playing=false;buildCover()}
+function loop(n){if(playing){t+=(n-last)/1000;if(t>=DUR)t=0;render(t)}last=n;requestAnimationFrame(loop)}
+render(0);requestAnimationFrame(loop);
+$("#pp").onclick=()=>{playing=!playing;$("#pp").textContent=playing?"⏸ Pause":"▶ Play"};
+$("#rs").onclick=()=>{t=0;playing=true;$("#pp").textContent="⏸ Pause"};
+$("#seek").oninput=e=>{t=+e.target.value;render(t)};
+document.querySelectorAll("[data-j]").forEach(b=>b.onclick=()=>{t=+b.dataset.j+.01;render(t)});
+function buildCover(){$("#cover").innerHTML=`<div class="blob" style="background:#22d3ee;left:-150px;top:-250px"></div><div class="blob" style="background:#8b5cf6;right:-200px;bottom:-300px"></div><div class="grid"></div>
+<div style="position:absolute;left:70px;top:60px" class="brand" ><i></i>autonomousIT</div>
+<div style="position:absolute;left:70px;top:150px;width:760px"><div class="kick">INTERACTIVE ANIMATED STORY</div><h1 style="font-size:72px">From Helpdesk to <b>self-running IT.</b></h1><p class="sub" style="font-size:24px">Triage → auto-resolve → closed-loop operations.</p></div>
+<div style="position:absolute;left:70px;bottom:60px;display:flex;gap:14px;align-items:center"><span class="chip" style="background:#0a66c2;font-size:18px;padding:10px 18px">in  LinkedIn</span><span class="chip" style="background:#1e7b85;font-size:18px;padding:10px 18px">Scribd · Résumé</span><span style="color:var(--mut);font-size:20px;margin-left:10px">Mahendran Varadharajan</span></div>
+<div style="position:absolute;right:60px;top:160px;width:260px;display:flex;flex-direction:column;gap:14px"><div class="node">Helpdesk</div><div class="node" style="border-color:var(--c1)">AI Triage</div><div class="node" style="border-color:var(--ok)">Auto-Resolve</div><div class="node" style="border-color:var(--c2)">Learn</div></div>`}
+</script></body></html>
