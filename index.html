@@ -4,8 +4,7 @@
 <title>autonomousIT — From Helpdesk to Self-Running IT</title>
 <meta name="description" content="Interactive animated story of autonomous IT, starting at the Helpdesk: AI triage, auto-resolution and a closed-loop operations model. By Mahendran Varadharajan.">
 <link rel="canonical" href="https://smartitbudget.github.io/autonomousIT">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="autonomousIT">
+<meta property="og:type" content="website"><meta property="og:site_name" content="autonomousIT">
 <meta property="og:title" content="autonomousIT — From Helpdesk to Self-Running IT">
 <meta property="og:description" content="Interactive animated story of autonomous IT, starting at the Helpdesk. By Mahendran Varadharajan.">
 <meta property="og:url" content="https://smartitbudget.github.io/autonomousIT">
@@ -16,174 +15,187 @@
 <meta name="twitter:description" content="Interactive animated story of autonomous IT, starting at the Helpdesk.">
 <meta name="twitter:image" content="https://smartitbudget.github.io/autonomousIT/cover.png">
 <style>
-:root{--bg:#070b18;--ink:#e8eefc;--mut:#8b9ac2;--c1:#22d3ee;--c2:#8b5cf6;--ok:#34d399;--card:#101834;--ln:#22305e}
+:root{--bg:#070b18;--ink:#e8eefc;--mut:#8b9ac2;--c1:#22d3ee;--c2:#8b5cf6;--ok:#34d399;--warn:#fbbf24;--card:#101834;--ln:#22305e}
 *{box-sizing:border-box;margin:0}
-html,body{height:100%;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
-body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:12px;overflow-x:hidden}
-#wrap{width:min(100%,1280px);aspect-ratio:16/9;position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--ln)}
-#stage{width:1280px;height:720px;position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden;background:var(--bg)}
-.blob{position:absolute;width:620px;height:620px;border-radius:50%;filter:blur(90px);opacity:.35}
-.grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:48px 48px}
-.el{position:absolute;opacity:0;visibility:hidden;will-change:transform,opacity}
-.brand{left:56px;top:34px;font-weight:800;font-size:22px;letter-spacing:.3px;display:flex;align-items:center;gap:10px}
-.brand i{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:block;box-shadow:0 0 16px var(--c1)}
-.kick{font-size:15px;letter-spacing:3px;color:var(--c1);font-weight:700;margin-bottom:14px}
-h1{font-size:54px;line-height:1.08;font-weight:800;letter-spacing:-1px}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.blob{position:fixed;width:560px;height:560px;border-radius:50%;filter:blur(100px);opacity:.3;z-index:0;animation:fl 18s ease-in-out infinite alternate}
+.b1{background:var(--c1);left:-150px;top:-200px}.b2{background:var(--c2);right:-180px;bottom:-240px;animation-delay:-9s}
+@keyframes fl{to{transform:translate(90px,60px)}}
+body:before{content:"";position:fixed;inset:0;z-index:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:48px 48px}
+header,main,footer{position:relative;z-index:1}
+header{display:flex;align-items:center;gap:18px;padding:14px 28px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:21px;display:flex;align-items:center;gap:10px}
+.brand i{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 0 16px var(--c1);animation:pl 2s infinite}
+@keyframes pl{50%{transform:scale(1.35)}}
+nav{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+button,.sb{font:600 14px inherit;font-family:inherit;color:var(--ink);background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:9px 14px;cursor:pointer;text-decoration:none;transition:.2s}
+button:hover,.sb:hover{border-color:var(--c1);transform:translateY(-1px)}
+nav button.on{background:linear-gradient(90deg,#22d3ee33,#8b5cf633);border-color:var(--c1)}
+main{flex:1;min-height:0;padding:0 28px;display:flex}
+.p{display:none;width:100%;gap:30px;align-items:center;animation:in .5s ease}
+.p.on{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr)}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+.kick{font-size:14px;letter-spacing:3px;color:var(--c1);font-weight:700;margin-bottom:12px}
+h1{font-size:clamp(30px,4.2vw,56px);line-height:1.08;font-weight:800;letter-spacing:-1px}
 h1 b{background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{font-size:20px;color:var(--mut);line-height:1.45;margin-top:18px}
+.sub{font-size:18px;color:var(--mut);line-height:1.5;margin-top:14px}
 .card{background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:16px 18px;box-shadow:0 20px 50px #0008}
-.chip{display:inline-block;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.5px}
-.new{background:#f59e0b22;color:#fbbf24}.tri{background:#8b5cf622;color:#c4b5fd}.res{background:#34d39922;color:var(--ok)}
 .mono{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
-.node{padding:14px 20px;border-radius:14px;background:var(--card);border:1px solid var(--ln);font-weight:700;font-size:18px;text-align:center}
-.tile{width:250px;height:150px;display:flex;flex-direction:column;justify-content:center;gap:8px}
-.tile b{font-size:22px}.tile span{color:var(--mut);font-size:15px}
-a.pc{display:flex;gap:18px;align-items:center;text-decoration:none;color:var(--ink);width:520px;padding:22px 26px;border-radius:20px;background:var(--card);border:2px solid var(--c1)}
-.logo{width:68px;height:68px;border-radius:16px;display:grid;place-items:center;font-weight:900;font-size:34px;color:#fff;flex:none}
-a.pc h3{font-size:26px}a.pc p{color:var(--mut);font-size:16px;margin-top:4px}
-.go{margin-left:auto;font-weight:800;color:var(--c1);font-size:18px;white-space:nowrap}
-.url{font-size:17px;padding:10px 18px;border-radius:999px;border:1px solid var(--ln);background:#0c1430;color:var(--c1)}
-#ctl{width:min(100%,1280px);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-button,.sb{font:600 14px Inter,system-ui,sans-serif;color:var(--ink);background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:9px 14px;cursor:pointer;text-decoration:none}
-button:hover,.sb:hover{border-color:var(--c1)}
-#seek{flex:1;min-width:160px;accent-color:var(--c1)}
-#share{width:min(100%,1280px);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-#share small{color:var(--mut);margin-right:6px}
-#cover{display:none;width:1200px;height:630px;position:relative;overflow:hidden;background:#070b18}
-body.cap{padding:0;display:block}body.cap #ctl,body.cap #share{display:none}
-body.cap #wrap{width:1280px;height:720px;border:0;border-radius:0}
-body.cov{padding:0;display:block}body.cov #ctl,body.cov #share,body.cov #stage{display:none}body.cov #wrap{width:1200px;height:630px;border:0;border-radius:0;aspect-ratio:auto}body.cov #cover{display:block}
-@media(max-width:700px){#share small{display:none}}
+.chip{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.5px}
+.new{background:#f59e0b22;color:var(--warn)}.tri{background:#8b5cf622;color:#c4b5fd}.res{background:#34d39922;color:var(--ok)}.esc{background:#f8717122;color:#fca5a5}
+.q{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 10px}
+.q button{font-size:13px;padding:7px 12px}
+.row{display:flex;gap:8px}
+input{flex:1;min-width:0;font:inherit;color:var(--ink);background:#0b1230;border:1px solid var(--ln);border-radius:10px;padding:11px 14px;outline:0}
+input:focus{border-color:var(--c1)}
+.go{background:linear-gradient(90deg,var(--c1),var(--c2));color:#04101f;border:0;font-weight:800}
+.pipe{display:flex;gap:8px;margin-bottom:12px}
+.pipe div{flex:1;text-align:center;font-size:13px;font-weight:700;padding:8px 4px;border-radius:10px;border:1px solid var(--ln);color:var(--mut);transition:.3s}
+.pipe div.on{color:#04101f;background:var(--c1);border-color:var(--c1);box-shadow:0 0 18px #22d3ee88}
+.pipe div.done{color:var(--ok);border-color:var(--ok)}
+.fields{font-size:15px;line-height:1.9;margin-top:10px}.fields span{color:var(--mut)}
+.steps{margin-top:10px;font-size:15px;line-height:2;min-height:96px}
+.steps div{opacity:0;transform:translateX(12px);transition:.4s}.steps div.s{opacity:1;transform:none}
+.tm{font-size:34px;font-weight:800}
+.hist{margin-top:10px;font-size:13px;color:var(--mut);display:flex;gap:6px;flex-wrap:wrap}
+.hist span{border:1px solid var(--ln);border-radius:8px;padding:3px 8px}
+.orbit{position:relative;height:min(52vh,440px);width:100%}
+.orbit .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:130px;height:130px;border-radius:50%;border:1px dashed var(--c1);display:grid;place-items:center;text-align:center;font-weight:800;line-height:1.2;box-shadow:0 0 40px #22d3ee33 inset}
+.nd{position:absolute;width:104px;text-align:center;padding:11px 0;background:var(--card);border:1px solid var(--ln);border-radius:12px;font-weight:700;cursor:pointer;transition:border .2s,box-shadow .2s}
+.nd:hover,.nd.on{border-color:var(--c1);box-shadow:0 0 22px #22d3ee66}
+.info{margin-top:18px;min-height:92px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tile{cursor:pointer;min-height:110px;transition:.25s}.tile:hover,.tile.on{border-color:var(--c1);transform:translateY(-3px)}
+.tile b{font-size:20px;display:block;margin-bottom:6px}.tile span{color:var(--mut);font-size:14px}
+a.pc{display:flex;gap:16px;align-items:center;text-decoration:none;color:var(--ink);padding:20px 22px;border-radius:18px;background:var(--card);border:2px solid var(--c1);margin-bottom:16px;transition:transform .2s}
+a.pc:hover{transform:scale(1.02)}
+.logo{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;font-weight:900;font-size:30px;color:#fff;flex:none}
+a.pc h3{font-size:24px}a.pc p{color:var(--mut);font-size:15px;margin-top:3px}a.pc em{margin-left:auto;font-style:normal;font-weight:800;color:var(--c1)}
+.url{display:inline-block;font-size:15px;padding:8px 16px;border-radius:999px;border:1px solid var(--ln);background:#0c1430;color:var(--c1);text-decoration:none}
+footer{padding:12px 28px 16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--ln);background:#070b18cc;backdrop-filter:blur(8px)}
+footer .lab{color:var(--mut);font-size:13px;font-weight:600}
+.hl{animation:gl 1.8s ease-in-out infinite;font-weight:700}
+.hl.l{border-color:var(--c1);--g:34,211,238}.hl.s{border-color:var(--c2);--g:139,92,246}
+@keyframes gl{50%{box-shadow:0 0 0 6px rgba(var(--g),.18),0 0 26px rgba(var(--g),.6)}}
+a.pc.hl{animation-duration:1.6s}
+.sp{flex:1}
+#tour.on{border-color:var(--ok);color:var(--ok)}
+@media(max-width:860px){body{overflow:auto}.p.on{grid-template-columns:1fr;padding:6px 0 20px}main{min-height:auto}nav{margin-left:0}}
 </style></head><body>
-<div id="wrap"><div id="stage">
-<div class="blob" id="b1" style="background:#22d3ee;left:-120px;top:-200px"></div>
-<div class="blob" id="b2" style="background:#8b5cf6;right:-160px;bottom:-260px"></div>
-<div class="grid"></div>
-<div class="el brand" data-s="0" data-e="38" data-y="-10"><i></i>autonomousIT</div>
+<div class="blob b1"></div><div class="blob b2"></div>
+<header><div class="brand"><i></i>autonomousIT</div>
+<nav id="nav"><button data-t="0" class="on">1 · Helpdesk</button><button data-t="1">2 · The Loop</button><button data-t="2">3 · Beyond IT</button><button data-t="3">4 · Reach me</button><button id="tour">▶ Auto tour</button></nav></header>
 
-<!-- S1 HELPDESK -->
-<div class="el" data-s="0.2" data-e="6" style="left:56px;top:190px;width:540px"><div class="kick">01 · HELPDESK</div><h1>Autonomous IT <b>begins at the Helpdesk.</b></h1><p class="sub">Where every request, outage and “can you help?” lands first.</p></div>
-<div class="el card" data-s="1" data-e="6" data-x="60" data-y="0" style="left:680px;top:150px;width:520px"><div style="color:var(--mut);font-size:14px;margin-bottom:8px">Employee · chat</div><div class="type" data-text="My VPN keeps dropping — I can’t join the call!" data-d="0.5" style="font-size:22px;min-height:62px"></div></div>
-<div class="el card" data-s="1" data-d="2.2" data-e="6" data-x="60" data-y="0" style="left:680px;top:300px;width:520px"><div style="display:flex;justify-content:space-between;align-items:center"><b class="mono">INC-1042</b><span class="chip new">NEW</span></div><div style="margin-top:8px;font-size:19px">VPN disconnects repeatedly</div><div style="color:var(--mut);margin-top:4px;font-size:14px">Priority: unassigned · waiting</div></div>
-<div class="el card" data-s="1" data-d="3.0" data-e="6" data-x="60" data-y="0" style="left:700px;top:440px;width:480px;opacity:.8"><b class="mono">INC-1043</b> &nbsp;Password reset <span class="chip new" style="float:right">NEW</span></div>
-<div class="el card" data-s="1" data-d="3.5" data-e="6" data-x="60" data-y="0" style="left:720px;top:512px;width:440px"><b class="mono">INC-1044</b> &nbsp;Laptop running slow <span class="chip new" style="float:right">NEW</span></div>
-<div class="el" data-s="1" data-d="4" data-e="6" style="left:680px;top:600px;color:var(--mut);font-size:16px">Tickets pile up. Humans queue. Time is lost.</div>
+<main>
+<!-- 1 HELPDESK -->
+<section class="p on">
+<div><div class="kick">01 · HELPDESK</div><h1>Autonomous IT <b>begins at the Helpdesk.</b></h1>
+<p class="sub">Try it: describe an issue and watch an agent triage, resolve and verify it.</p>
+<div class="q" id="q"><button>VPN keeps dropping</button><button>I’m locked out of my account</button><button>Laptop running slow</button><button>Printer offline</button><button>Something odd with my badge</button></div>
+<div class="row"><input id="in" placeholder="Describe your issue…" maxlength="90"><button class="go" id="go">Submit</button></div>
+<div class="hist" id="hist"></div></div>
+<div class="card"><div class="pipe" id="pipe"><div>Intake</div><div>Triage</div><div>Resolve</div><div>Verified</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><b class="mono" id="tid">INC-1042</b><span class="chip new" id="chip">WAITING</span></div>
+<div id="msg" style="margin-top:8px;font-size:18px;min-height:26px;color:var(--mut)">Waiting for a request…</div>
+<div class="fields mono" id="fld"></div><div class="steps mono" id="stp"></div>
+<div style="display:flex;align-items:center;gap:14px;margin-top:6px"><div class="tm mono" id="tm">00:00</div><span style="color:var(--mut);font-size:13px">simulated time to resolve · illustrative demo, rule-based</span></div></div>
+</section>
 
-<!-- S2 TRIAGE -->
-<div class="el" data-s="6.2" data-e="12" style="left:56px;top:190px;width:540px"><div class="kick">02 · AI TRIAGE</div><h1>An agent <b>reads, classifies, routes.</b></h1><p class="sub">Context from monitoring and CMDB, in milliseconds.</p></div>
-<div class="el node" data-s="6.6" data-e="12" data-y="0" data-x="40" style="left:640px;top:170px;width:150px">Intake</div>
-<div class="el node" data-s="6.9" data-e="12" data-y="0" data-x="40" style="left:810px;top:170px;width:150px">Classify</div>
-<div class="el node" data-s="7.2" data-e="12" data-y="0" data-x="40" style="left:980px;top:170px;width:150px">Context</div>
-<div class="el node" data-s="7.5" data-e="12" data-y="0" data-x="40" style="left:1060px;top:260px;width:150px;display:none">Route</div>
-<div class="el" data-s="6.6" data-e="12" style="left:715px;top:216px;width:340px;height:3px;background:var(--ln)"></div>
-<div class="el" id="pkt" data-s="7" data-e="12" style="left:715px;top:208px;width:18px;height:18px;border-radius:50%;background:var(--c1);box-shadow:0 0 24px var(--c1)"></div>
-<div class="el card" data-s="6.6" data-d="2.2" data-e="12" style="left:660px;top:300px;width:520px"><div style="display:flex;justify-content:space-between"><b class="mono">INC-1042</b><span class="chip tri">TRIAGED</span></div>
-<div class="mono" style="margin-top:14px;font-size:16px;line-height:2"><span style="color:var(--mut)">category </span> Network / VPN<br><span style="color:var(--mut)">priority &nbsp;</span> P2 · affects meeting<br><span style="color:var(--mut)">cause &nbsp;&nbsp;&nbsp;&nbsp;</span> gateway session timeout<br><span style="color:var(--mut)">route &nbsp;&nbsp;&nbsp;&nbsp;</span> → auto-resolve runbook</div></div>
-<div class="el" data-s="6.6" data-d="3.6" data-e="12" style="left:660px;top:540px;color:var(--mut);font-size:15px">Illustrative scenario for demonstration.</div>
+<!-- 2 LOOP -->
+<section class="p"><div><div class="kick">02 · THE LOOP</div><h1>A closed loop that <b>never clocks out.</b></h1>
+<p class="sub">Click any stage of the loop.</p><div class="card info" id="linfo"></div></div>
+<div class="orbit" id="orb"><div class="core">Autonomous<br><span style="color:var(--c1)">IT</span></div></div></section>
 
-<!-- S3 RESOLVE -->
-<div class="el" data-s="12.2" data-e="18" style="left:56px;top:190px;width:540px"><div class="kick">03 · AUTO-RESOLVE</div><h1>Then it <b>fixes it.</b> No queue.</h1><p class="sub">Runbooks execute, results are verified, the user is told.</p></div>
-<div class="el card mono" data-s="12.5" data-e="18" data-x="50" data-y="0" style="left:650px;top:150px;width:560px;font-size:17px;line-height:2.1">
-<div style="color:var(--mut)">$ runbook vpn-session-recovery</div>
-<div class="el2" data-t="13.2">› check gateway health <span style="color:var(--ok)">✓</span></div>
-<div class="el2" data-t="14.0">› reset stale user session <span style="color:var(--ok)">✓</span></div>
-<div class="el2" data-t="14.8">› push updated VPN profile <span style="color:var(--ok)">✓</span></div>
-<div class="el2" data-t="15.6">› verify tunnel &amp; latency <span style="color:var(--ok)">✓</span></div></div>
-<div class="el card" data-s="12.5" data-d="3.4" data-e="18" style="left:650px;top:430px;width:560px;border-color:var(--ok);display:flex;align-items:center;gap:20px"><span class="chip res" style="font-size:16px">RESOLVED</span><div><div id="tm" class="mono" style="font-size:40px;font-weight:800">00:00</div><div style="color:var(--mut);font-size:14px">time to resolve (illustrative)</div></div><div style="margin-left:auto;font-size:18px;max-width:170px">“You’re back online.”</div></div>
+<!-- 3 BEYOND -->
+<section class="p"><div><div class="kick">03 · BEYOND THE HELPDESK</div><h1>One pattern, <b>every IT domain.</b></h1>
+<p class="sub">The same observe → decide → act → verify → learn loop scales across the stack.</p><div class="card info" id="tinfo"></div></div>
+<div class="tiles" id="tiles"></div></section>
 
-<!-- S4 LOOP -->
-<div class="el" data-s="18.2" data-e="25" style="left:56px;top:190px;width:540px"><div class="kick">04 · THE LOOP</div><h1>A closed loop that <b>never clocks out.</b></h1><p class="sub">Observe, decide, act, verify, learn — then do it again, better.</p></div>
-<div class="el" data-s="18.6" data-e="25" style="left:790px;top:270px;width:220px;height:220px;border-radius:50%;border:1px dashed var(--ln)"></div>
-<div class="el" data-s="18.6" data-e="25" style="left:830px;top:340px;width:140px;text-align:center;font-weight:800;font-size:22px;line-height:1.2"><b>Autonomous</b><br><span style="color:var(--c1)">IT</span></div>
-<div class="el node orb" data-s="18.8" data-d="0.0" data-e="25" data-y="0" style="width:130px">Observe</div>
-<div class="el node orb" data-s="18.8" data-d="0.3" data-e="25" data-y="0" style="width:130px">Decide</div>
-<div class="el node orb" data-s="18.8" data-d="0.6" data-e="25" data-y="0" style="width:130px">Act</div>
-<div class="el node orb" data-s="18.8" data-d="0.9" data-e="25" data-y="0" style="width:130px">Verify</div>
-<div class="el node orb" data-s="18.8" data-d="1.2" data-e="25" data-y="0" style="width:130px">Learn</div>
+<!-- 4 REACH -->
+<section class="p"><div><div class="kick">04 · LET’S CONNECT</div><h1>Need to reach me? <b>I’m right here.</b></h1>
+<p class="sub">Mahendran Varadharajan<br><br><a class="url" href="https://smartitbudget.github.io/autonomousIT" target="_blank" rel="noopener">smartitbudget.github.io/autonomousIT</a></p></div>
+<div><a class="pc hl l" href="https://www.linkedin.com/in/mahendranvaradharajan/" target="_blank" rel="noopener"><div class="logo" style="background:#0a66c2">in</div><div><h3>LinkedIn</h3><p>Connect &amp; message me</p></div><em>Connect →</em></a>
+<a class="pc hl s" style="border-color:var(--c2)" href="https://www.scribd.com/document/1094326085/Mahendran-Varadharajan-Resume-pdf" target="_blank" rel="noopener"><div class="logo" style="background:#1e7b85;font-family:Georgia,serif">S</div><div><h3>Scribd · Résumé</h3><p>Read my full profile</p></div><em style="color:#c4b5fd">Read →</em></a></div></section>
+</main>
 
-<!-- S5 BEYOND -->
-<div class="el" data-s="25.2" data-e="31" style="left:56px;top:190px;width:500px"><div class="kick">05 · BEYOND THE HELPDESK</div><h1>One pattern, <b>every IT domain.</b></h1><p class="sub">The same loop scales across the stack.</p></div>
-<div class="el card tile" data-s="25.5" data-d="0" data-e="31" style="left:620px;top:170px"><b>Helpdesk</b><span>Triage · resolve · communicate</span></div>
-<div class="el card tile" data-s="25.5" data-d="0.4" data-e="31" style="left:900px;top:170px"><b>Infrastructure</b><span>Detect · heal · scale</span></div>
-<div class="el card tile" data-s="25.5" data-d="0.8" data-e="31" style="left:620px;top:350px"><b>Security</b><span>Spot · contain · report</span></div>
-<div class="el card tile" data-s="25.5" data-d="1.2" data-e="31" style="left:900px;top:350px"><b>IT Budget</b><span>Forecast · optimise · govern</span></div>
-<div class="el url" data-s="25.5" data-d="2.2" data-e="31" style="left:620px;top:550px">smartitbudget.github.io/autonomousIT</div>
-
-<!-- S6 CONNECT -->
-<div class="el" data-s="31.2" data-e="38.5" data-y="-20" style="left:56px;top:120px;width:1168px;text-align:center"><div class="kick">06 · LET’S CONNECT</div><h1 style="font-size:64px">Need to reach me? <b>I’m right here.</b></h1><p class="sub" style="margin-top:10px">Mahendran Varadharajan</p></div>
-<a class="el pc hl" id="h1" data-s="31.6" data-d="0.3" data-e="38.5" data-y="40" href="https://www.linkedin.com/in/mahendranvaradharajan/" target="_blank" rel="noopener" style="left:90px;top:330px"><div class="logo" style="background:#0a66c2">in</div><div><h3>LinkedIn</h3><p>Connect &amp; message me</p></div><div class="go">Connect →</div></a>
-<a class="el pc hl" id="h2" data-s="31.6" data-d="0.8" data-e="38.5" data-y="40" href="https://www.scribd.com/document/1094326085/Mahendran-Varadharajan-Resume-pdf" target="_blank" rel="noopener" style="left:670px;top:330px;border-color:var(--c2)"><div class="logo" style="background:#1e7b85;font-family:Georgia,serif">S</div><div><h3>Scribd · Résumé</h3><p>Read my full profile</p></div><div class="go" style="color:#c4b5fd">Read →</div></a>
-<div class="el" data-s="31.6" data-d="1.8" data-e="38.5" style="left:0;top:500px;width:1280px;text-align:center;font-size:19px;color:var(--mut)">Share this story everywhere ↓ &nbsp; <span class="url">smartitbudget.github.io/autonomousIT</span></div>
-</div>
-<div id="cover"></div></div>
-
-<div id="ctl"><button id="pp">⏸ Pause</button><button id="rs">↺ Restart</button><input id="seek" type="range" min="0" max="38.5" step="0.01" value="0"><span id="tt" class="mono" style="font-size:13px;color:var(--mut)">0:00</span>
-<button data-j="0">Helpdesk</button><button data-j="6.2">Triage</button><button data-j="12.2">Resolve</button><button data-j="18.2">Loop</button><button data-j="25.2">Beyond</button><button data-j="31.2">Connect</button></div>
-<div id="share"><small>Share:</small>
-<button data-n="native">Share…</button><button data-n="linkedin">LinkedIn</button><button data-n="x">X</button><button data-n="facebook">Facebook</button><button data-n="whatsapp">WhatsApp</button><button data-n="telegram">Telegram</button><button data-n="reddit">Reddit</button><button data-n="email">Email</button><button data-n="copy">Copy link</button></div>
+<footer>
+<a class="sb hl l" href="https://www.linkedin.com/in/mahendranvaradharajan/" target="_blank" rel="noopener">in LinkedIn</a>
+<a class="sb hl s" href="https://www.scribd.com/document/1094326085/Mahendran-Varadharajan-Resume-pdf" target="_blank" rel="noopener">Scribd Résumé</a>
+<span class="sp"></span><span class="lab">Share:</span>
+<button data-n="native">Share…</button><button data-n="linkedin">LinkedIn</button><button data-n="x">X</button><button data-n="facebook">Facebook</button><button data-n="whatsapp">WhatsApp</button><button data-n="telegram">Telegram</button><button data-n="reddit">Reddit</button><button data-n="email">Email</button><button data-n="copy">Copy link</button>
+</footer>
 
 <script>
-/* ---- Share API: always shares the GitHub Pages URL; previews come from its Open Graph tags ---- */
+/* Share API — always shares the GitHub Pages URL; previews come from its Open Graph tags */
 window.AutonomousITShare=(function(){
   const url="https://smartitbudget.github.io/autonomousIT",title="autonomousIT — From Helpdesk to Self-Running IT",
-  text="Interactive animated story of autonomous IT, starting at the Helpdesk. By Mahendran Varadharajan.";
-  const e=encodeURIComponent,links={
-    linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${e(url)}`,
-    x:`https://twitter.com/intent/tweet?url=${e(url)}&text=${e(title)}`,
-    facebook:`https://www.facebook.com/sharer/sharer.php?u=${e(url)}`,
-    whatsapp:`https://wa.me/?text=${e(title+" "+url)}`,
-    telegram:`https://t.me/share/url?url=${e(url)}&text=${e(title)}`,
-    reddit:`https://www.reddit.com/submit?url=${e(url)}&title=${e(title)}`,
-    email:`mailto:?subject=${e(title)}&body=${e(text+"\n\n"+url)}`};
+  text="Interactive animated story of autonomous IT, starting at the Helpdesk. By Mahendran Varadharajan.",e=encodeURIComponent;
+  const links={linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${e(url)}`,x:`https://twitter.com/intent/tweet?url=${e(url)}&text=${e(title)}`,
+  facebook:`https://www.facebook.com/sharer/sharer.php?u=${e(url)}`,whatsapp:`https://wa.me/?text=${e(title+" "+url)}`,
+  telegram:`https://t.me/share/url?url=${e(url)}&text=${e(title)}`,reddit:`https://www.reddit.com/submit?url=${e(url)}&title=${e(title)}`,
+  email:`mailto:?subject=${e(title)}&body=${e(text+"\n\n"+url)}`};
   async function share(n){
-    if(n==="native"){ if(navigator.share){try{await navigator.share({title,text,url});return}catch(_){return}} n="copy"}
-    if(n==="copy"){try{await navigator.clipboard.writeText(url);alert("Link copied: "+url)}catch(_){prompt("Copy link:",url)};return}
-    if(links[n])window.open(links[n],"_blank","noopener,width=720,height=640")
-  }
-  return {url,title,text,links,share};
-})();
+    if(n==="native"){if(navigator.share){try{await navigator.share({title,text,url})}catch(_){}return}n="copy"}
+    if(n==="copy"){try{await navigator.clipboard.writeText(url);alert("Link copied: "+url)}catch(_){prompt("Copy link:",url)}return}
+    if(links[n])window.open(links[n],"_blank","noopener,width=720,height=640")}
+  return{url,title,text,links,share}})();
 document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>AutonomousITShare.share(b.dataset.n));
 
-/* ---- Animation engine: everything is a pure function of time t ---- */
-const DUR=38.5,$=s=>document.querySelector(s),stage=$("#stage"),wrap=$("#wrap");
-const E=x=>x<0?0:x>1?1:1-Math.pow(1-x,3),C=x=>Math.max(0,Math.min(1,x));
-const els=[...document.querySelectorAll(".el")],typ=[...document.querySelectorAll(".type")],ck=[...document.querySelectorAll(".el2")],orb=[...document.querySelectorAll(".orb")];
-ck.forEach(c=>{c.style.opacity=0});
-function render(t){
-  els.forEach(el=>{const d=el.dataset,s=+d.s,e=+d.e,dl=+(d.d||0);
-    const i=E((t-s-dl)/.6),o=E((e-t)/.5),a=Math.min(i,o);
-    el.style.opacity=a;el.style.visibility=a>.01?"visible":"hidden";
-    const x=(d.x?+d.x:0)*(1-i),y=(d.y!==undefined?+d.y:24)*(1-i);
-    el.style.transform=`translate(${x}px,${y}px) scale(${.96+.04*i})`});
-  typ.forEach(el=>{const s=+el.parentElement.dataset.s+ +(el.parentElement.dataset.d||0)+ +el.dataset.d;
-    el.textContent=el.dataset.text.slice(0,Math.max(0,Math.floor((t-s)*26)))+(t>s&&t<s+2?"▍":"")});
-  ck.forEach(c=>{c.style.opacity=E((t-+c.dataset.t)/.4)});
-  const pk=$("#pkt");if(pk){const p=C((t-7.3)/2.2);pk.style.left=(715+p*320)+"px"}
-  const tm=C((t-15.9)/1.6)*42;$("#tm").textContent="00:"+String(Math.floor(tm)).padStart(2,"0");
-  orb.forEach((n,k)=>{const a=(k*72+t*28-90)*Math.PI/180;n.style.left=(900+Math.cos(a)*215-65)+"px";n.style.top=(380+Math.sin(a)*170-24)+"px"});
-  const pu=(Math.sin(t*4)+1)/2;
-  ["#h1","#h2"].forEach((q,k)=>{const el=$(q),c=k?"139,92,246":"34,211,238";
-    el.style.boxShadow=t>31.5?`0 0 0 ${4+10*pu}px rgba(${c},.2),0 0 ${40+30*pu}px rgba(${c},.55)`:"0 20px 50px #0008"});
-  $("#b1").style.transform=`translate(${Math.sin(t*.3)*80}px,${Math.cos(t*.25)*60}px)`;
-  $("#b2").style.transform=`translate(${Math.cos(t*.27)*80}px,${Math.sin(t*.31)*60}px)`;
-  $("#seek").value=t;$("#tt").textContent=Math.floor(t/60)+":"+String(Math.floor(t%60)).padStart(2,"0");
-}
-window.setT=t=>{render(t)};
-let t=0,playing=true,last=performance.now();
-function fit(){if(document.body.classList.contains("cap"))return;stage.style.transform=`scale(${wrap.clientWidth/1280})`}
-addEventListener("resize",fit);fit();
-const q=location.search;
-if(q.includes("capture")){document.body.classList.add("cap");stage.style.transform="none";playing=false}
-if(q.includes("cover")){document.body.classList.add("cov");playing=false;buildCover()}
-function loop(n){if(playing){t+=(n-last)/1000;if(t>=DUR)t=0;render(t)}last=n;requestAnimationFrame(loop)}
-render(0);requestAnimationFrame(loop);
-$("#pp").onclick=()=>{playing=!playing;$("#pp").textContent=playing?"⏸ Pause":"▶ Play"};
-$("#rs").onclick=()=>{t=0;playing=true;$("#pp").textContent="⏸ Pause"};
-$("#seek").oninput=e=>{t=+e.target.value;render(t)};
-document.querySelectorAll("[data-j]").forEach(b=>b.onclick=()=>{t=+b.dataset.j+.01;render(t)});
-function buildCover(){$("#cover").innerHTML=`<div class="blob" style="background:#22d3ee;left:-150px;top:-250px"></div><div class="blob" style="background:#8b5cf6;right:-200px;bottom:-300px"></div><div class="grid"></div>
-<div style="position:absolute;left:70px;top:60px" class="brand" ><i></i>autonomousIT</div>
-<div style="position:absolute;left:70px;top:150px;width:760px"><div class="kick">INTERACTIVE ANIMATED STORY</div><h1 style="font-size:72px">From Helpdesk to <b>self-running IT.</b></h1><p class="sub" style="font-size:24px">Triage → auto-resolve → closed-loop operations.</p></div>
-<div style="position:absolute;left:70px;bottom:60px;display:flex;gap:14px;align-items:center"><span class="chip" style="background:#0a66c2;font-size:18px;padding:10px 18px">in  LinkedIn</span><span class="chip" style="background:#1e7b85;font-size:18px;padding:10px 18px">Scribd · Résumé</span><span style="color:var(--mut);font-size:20px;margin-left:10px">Mahendran Varadharajan</span></div>
-<div style="position:absolute;right:60px;top:160px;width:260px;display:flex;flex-direction:column;gap:14px"><div class="node">Helpdesk</div><div class="node" style="border-color:var(--c1)">AI Triage</div><div class="node" style="border-color:var(--ok)">Auto-Resolve</div><div class="node" style="border-color:var(--c2)">Learn</div></div>`}
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],sleep=ms=>new Promise(r=>setTimeout(r,ms));
+/* Tabs + auto tour */
+let cur=0,tourT=null;
+function go(i){cur=(i+4)%4;$$(".p").forEach((p,k)=>p.classList.toggle("on",k===cur));$$("#nav [data-t]").forEach((b,k)=>b.classList.toggle("on",k===cur))}
+$$("#nav [data-t]").forEach(b=>b.onclick=()=>{stopTour();go(+b.dataset.t)});
+function stopTour(){clearInterval(tourT);tourT=null;$("#tour").classList.remove("on");$("#tour").textContent="▶ Auto tour"}
+$("#tour").onclick=()=>{if(tourT){stopTour();return}$("#tour").classList.add("on");$("#tour").textContent="⏸ Touring";go(cur+1);tourT=setInterval(()=>go(cur+1),7000)};
+addEventListener("keydown",e=>{if(e.target.tagName==="INPUT")return;if(e.key==="ArrowRight"){stopTour();go(cur+1)}if(e.key==="ArrowLeft"){stopTour();go(cur-1)}});
+
+/* Helpdesk simulator (illustrative, rule-based) */
+const R=[
+{k:/vpn|tunnel|remote/i,cat:"Network / VPN",pri:"P2 · blocks meetings",cause:"gateway session timeout",steps:["check gateway health","reset stale user session","push updated VPN profile","verify tunnel & latency"],say:"You’re back online."},
+{k:/password|locked|login|account|access/i,cat:"Identity / Access",pri:"P3",cause:"account lockout policy",steps:["verify user identity","unlock account","force secure password reset","confirm sign-in works"],say:"Account unlocked — check your email to set a new password."},
+{k:/slow|laptop|lag|freez|performance/i,cat:"Endpoint",pri:"P3",cause:"high memory & pending updates",steps:["collect device telemetry","clear temp files & caches","install pending patches","re-check performance"],say:"Your laptop is tuned up. A restart finishes the job."},
+{k:/printer|print|scan/i,cat:"Peripherals",pri:"P4",cause:"print spooler stalled",steps:["ping printer","restart print spooler","clear stuck jobs","send test page"],say:"Printer is back. Test page sent."},
+{k:/mail|outlook|teams|calendar/i,cat:"Collaboration",pri:"P3",cause:"stale client cache",steps:["check service status","rebuild client profile cache","re-sync mailbox","verify send/receive"],say:"Mail is syncing normally again."}];
+let n=1042,busy=false;
+function setPipe(i){$$("#pipe div").forEach((d,k)=>{d.className=k<i?"done":k===i?"on":""})}
+async function run(text){
+  text=text.trim();if(!text||busy)return;busy=true;$("#go").disabled=true;n++;
+  const r=R.find(x=>x.k.test(text)),t0=Date.now();
+  $("#tid").textContent="INC-"+n;$("#chip").className="chip new";$("#chip").textContent="NEW";$("#msg").style.color="var(--ink)";$("#msg").textContent="“"+text+"”";
+  $("#fld").innerHTML="";$("#stp").innerHTML="";$("#tm").textContent="00:00";setPipe(0);await sleep(900);
+  setPipe(1);$("#chip").className="chip tri";$("#chip").textContent="TRIAGING";
+  const f=r?[["category",r.cat],["priority",r.pri],["cause",r.cause],["route","→ auto-resolve runbook"]]:[["category","Unclassified"],["priority","P3 · needs review"],["cause","not in known patterns"],["route","→ human engineer, with summary"]];
+  for(const [a,b] of f){$("#fld").innerHTML+=`<div><span>${a.padEnd(9,"\u00a0")}</span> ${b}</div>`;await sleep(380)}
+  await sleep(300);
+  if(!r){setPipe(2);$("#chip").className="chip esc";$("#chip").textContent="ESCALATED";$("#stp").innerHTML=`<div class="s">› context attached &amp; ticket handed to an engineer <span style="color:var(--warn)">✓</span></div>`;
+    $("#stp").firstChild.classList.add("s");$("#msg").textContent="Escalated with full context — autonomy knows its limits.";busy=false;$("#go").disabled=false;hist(text,"escalated");return}
+  setPipe(2);$("#chip").className="chip tri";$("#chip").textContent="RESOLVING";
+  let sim=0;
+  for(const s of r.steps){const d=document.createElement("div");d.innerHTML=`› ${s} <span style="color:var(--ok)">✓</span>`;$("#stp").appendChild(d);await sleep(30);d.classList.add("s");
+    sim+=8+Math.floor(Math.random()*6);$("#tm").textContent="00:"+String(sim).padStart(2,"0");await sleep(650)}
+  setPipe(4);$("#chip").className="chip res";$("#chip").textContent="RESOLVED";$("#msg").textContent="“"+r.say+"”";$("#msg").style.color="var(--ok)";
+  busy=false;$("#go").disabled=false;hist(text,"resolved in 00:"+String(sim).padStart(2,"0"))}
+function hist(t,s){const h=document.createElement("span");h.textContent=`INC-${n} · ${s}`;$("#hist").prepend(h);while($("#hist").children.length>4)$("#hist").lastChild.remove()}
+$$("#q button").forEach(b=>b.onclick=()=>{$("#in").value=b.textContent;run(b.textContent)});
+$("#go").onclick=()=>{run($("#in").value);$("#in").value=""};
+$("#in").addEventListener("keydown",e=>{if(e.key==="Enter"){run($("#in").value);$("#in").value=""}});
+
+/* Loop */
+const L=[["Observe","Telemetry, logs, tickets and user signals stream in continuously."],["Decide","Context from monitoring and the CMDB picks the best action — or escalates."],["Act","Approved runbooks execute automatically, with guardrails and audit trail."],["Verify","The outcome is checked against the original symptom before closing."],["Learn","Every result feeds back into patterns and runbooks so the loop improves."]];
+let sel=-1,off=0,hover=false;
+const orb=$("#orb"),nodes=L.map((l,i)=>{const d=document.createElement("div");d.className="nd";d.textContent=l[0];d.onclick=()=>pick(i);orb.appendChild(d);return d});
+function pick(i){sel=i;nodes.forEach((d,k)=>d.classList.toggle("on",k===i));$("#linfo").innerHTML=`<b style="font-size:20px">${L[i][0]}</b><p class="sub" style="margin-top:6px;font-size:16px">${L[i][1]}</p>`}
+orb.onmouseenter=()=>hover=true;orb.onmouseleave=()=>hover=false;pick(0);
+let last=performance.now();
+(function tick(t){const dt=(t-last)/1000;last=t;if(!hover&&$(".p.on")===$$(".p")[1])off+=dt*26;
+  const w=orb.clientWidth,h=orb.clientHeight;
+  nodes.forEach((d,k)=>{const a=(k*72+off-90)*Math.PI/180;d.style.left=(w/2+Math.cos(a)*Math.min(w*.38,230)-52)+"px";d.style.top=(h/2+Math.sin(a)*h*.4-21)+"px"});
+  requestAnimationFrame(tick)})(last);
+
+/* Beyond */
+const T=[["Helpdesk","Triage · resolve · communicate","Password resets, VPN, endpoint issues — handled end-to-end, escalated only when needed."],["Infrastructure","Detect · heal · scale","Spot drift and failures early, self-heal known faults, scale capacity ahead of demand."],["Security","Spot · contain · report","Correlate signals, contain threats within guardrails, and produce clear incident reports."],["IT Budget","Forecast · optimise · govern","Track spend, forecast, flag waste and keep IT cost decisions transparent."]];
+T.forEach((x,i)=>{const d=document.createElement("div");d.className="card tile";d.innerHTML=`<b>${x[0]}</b><span>${x[1]}</span>`;d.onclick=()=>pickT(i);$("#tiles").appendChild(d)});
+function pickT(i){$$("#tiles .tile").forEach((d,k)=>d.classList.toggle("on",k===i));$("#tinfo").innerHTML=`<b style="font-size:20px">${T[i][0]}</b><p class="sub" style="margin-top:6px;font-size:16px">${T[i][2]}</p>`}pickT(0);
 </script></body></html>
